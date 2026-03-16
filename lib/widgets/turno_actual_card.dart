@@ -22,7 +22,7 @@ class TurnoActualCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "ATENDIENDO AHORA",
+            "ATENDIENDO AHORA:",
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -33,7 +33,7 @@ class TurnoActualCard extends StatelessWidget {
           const SizedBox(height: 10),
           // Si no hay turno, mostramos un guion o mensaje
           Text(
-            turno?.nombre ?? "---",
+            turno?.nombre ?? " ",
             style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
           ),
           if (turno != null)

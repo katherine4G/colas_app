@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
         title: const Text(
-          'QuickWait',
+          'Turnos digitales',
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
         centerTitle: false,
@@ -44,10 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          // 1. Cabecera con el turno en atención
           TurnoActualCard(turno: manager.turnoActual),
 
-          // 2. Contenedor de la lista (Estructura de la cola)
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(top: 10),
@@ -81,7 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-          // 3. Botón de Acción (Componente separado)
           BotonAccionCola(
             onPressed: manager.cola.isEmpty
                 ? null

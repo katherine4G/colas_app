@@ -16,6 +16,12 @@ class ListaEsperaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Formateo simple de la hora (HH:MM:SS)
+    final String horaFormateada =
+        "${item.horaEntrada.hour.toString().padLeft(2, '0')}:"
+        "${item.horaEntrada.minute.toString().padLeft(2, '0')}:"
+        "${item.horaEntrada.second.toString().padLeft(2, '0')}";
+
     return TweenAnimationBuilder<double>(
       duration: const Duration(milliseconds: 400),
       tween: Tween(begin: 0.0, end: 1.0),
@@ -45,15 +51,34 @@ class ListaEsperaItem extends StatelessWidget {
               backgroundColor: isFront ? Colors.blueAccent : Colors.grey,
               child: Text(
                 "${item.id}",
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(width: 15),
-            Text(
-              item.nombre,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            // Agregamos un Column para mostrar Nombre + Hora
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.nombre,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  Text(
+                    "Ingreso: $horaFormateada",
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                  ),
+                ],
+              ),
             ),
-            const Spacer(),
+            const SizedBox(width: 10),
             if (isFront) _buildBadge("FRONT", Colors.blueAccent),
             if (isRear && !isFront) _buildBadge("REAR", Colors.grey),
           ],
