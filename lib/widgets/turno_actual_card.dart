@@ -31,7 +31,6 @@ class TurnoActualCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          // Si no hay turno, mostramos un guion o mensaje
           Text(
             turno?.nombre ?? " ",
             style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),

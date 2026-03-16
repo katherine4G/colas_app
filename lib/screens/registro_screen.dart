@@ -34,7 +34,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
               ),
             ),
             const Text(
-              "Ingrese el nombre para asignar un turno en la cola FIFO.",
+              "Ingrese el nombre para asignar un turno en la cola.",
               style: TextStyle(color: Colors.grey),
             ),
             const SizedBox(height: 40),

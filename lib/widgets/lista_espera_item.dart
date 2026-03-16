@@ -16,7 +16,6 @@ class ListaEsperaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Formateo simple de la hora (HH:MM:SS)
     final String horaFormateada =
         "${item.horaEntrada.hour.toString().padLeft(2, '0')}:"
         "${item.horaEntrada.minute.toString().padLeft(2, '0')}:"
