@@ -18,6 +18,10 @@ class ColaManager {
     );
   }
 
+  void cancelarTurno(int id) {
+    _cola.removeWhere((turno) => turno.id == id);
+  }
+
   void atenderSiguiente() {
     if (_cola.isNotEmpty) {
       if (_turnoActual != null) {

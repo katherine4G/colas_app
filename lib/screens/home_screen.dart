@@ -22,10 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
         title: const Text(
-          'Turnos digitales',
+          'Turnos Digitales',
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
-        centerTitle: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.history),
@@ -45,42 +44,40 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           TurnoActualCard(turno: manager.turnoActual),
-
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(top: 10),
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
               ),
               child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(30),
                 ),
                 child: manager.cola.isEmpty
                     ? _buildEmptyState()
                     : ListView.separated(
                         padding: const EdgeInsets.all(20),
                         itemCount: manager.cola.length,
-                        separatorBuilder: (_, _) => const SizedBox(height: 12),
+                        separatorBuilder: (_, __) => const SizedBox(height: 12),
                         itemBuilder: (context, index) {
+                          final item = manager.cola[index];
                           return ListaEsperaItem(
-                            item: manager.cola[index],
+                            item: item,
                             isFront: index == 0,
                             isRear: index == manager.cola.length - 1,
+                            onCancel: () =>
+                                setState(() => manager.cancelarTurno(item.id)),
                           );
                         },
                       ),
               ),
             ),
           ),
-
           BotonAccionCola(
-            onPressed: manager.cola.isEmpty
+            // Habilitado mientras haya alguien en espera O alguien en atención
+            onPressed: (manager.cola.isEmpty && manager.turnoActual == null)
                 ? null
                 : () => setState(() => manager.atenderSiguiente()),
           ),
@@ -115,10 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 16),
           Text(
             "No hay clientes en espera",
-            style: TextStyle(
-              color: Colors.grey.shade500,
-              fontWeight: FontWeight.w500,
-            ),
+            style: TextStyle(color: Colors.grey.shade500),
           ),
         ],
       ),
